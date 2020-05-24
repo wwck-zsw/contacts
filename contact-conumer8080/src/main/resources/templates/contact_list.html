@@ -11,8 +11,7 @@
     $(function(){
         selectByName();
         $("button[name='sel']").click(function(){
-            var data=$("#selForm").serialize();
-            selectByName(data);
+            selectByName($("#selForm").serialize());
         })
         $("button[name='concat_upd']").click(function(){
             var data=$("#updForm").serialize();
@@ -38,14 +37,14 @@
         })
     })
     function selectByName(data){
+        $("#table tr:gt(0)").remove();
         $.get("/selectByName",data,function(result){
-            $("#table tr:gt(0)").remove();
             var list=result.list;
             $.each(list,function(index,i){
-               var tr=" <tr><td>"+i.id+"</td><td><a name='sel' data-toggle='modal' data-target='#updModal' selId='"+i.id+"'>"+i.cname+"</a></td><td>"+i.mobile+"</td><td>"+i.qq+"</td><td>"+i.email+"</td><td>"+i.address+"</td></tr>";
+               var tr="<tr><td>"+i.id+"</td><td><a name='sel' data-toggle='modal' data-target='#updModal' selId='"+i.id+"'>"+i.cname+"</a></td><td>"+i.mobile+"</td><td>"+i.qq+"</td><td>"+i.email+"</td><td>"+i.address+"</td></tr>";
                $("#table").append(tr);
             })
-            $("a[name='sel']").click(function(result){
+            $("a[name='sel']").click(function(){
                 var id=$(this).attr("selId");
                 $.get("/selectById","id="+id,function(res){
                     $("#id").val(res.id);
