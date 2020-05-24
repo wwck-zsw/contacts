@@ -22,7 +22,7 @@ public class ContactController {
             pageNum=1;
         }
         if(pageSize==null){
-            pageSize=5;
+            pageSize=6;
         }
         return contactClient.selectByName(cname,pageNum,pageSize);
     }

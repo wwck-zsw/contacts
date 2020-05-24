@@ -10,28 +10,66 @@
 <script type="text/javascript">
     $(function(){
         selectByName();
+        $("button[name='sel']").click(function(){
+            var data=$("#selForm").serialize();
+            selectByName(data);
+        })
+        $("button[name='concat_upd']").click(function(){
+            var data=$("#updForm").serialize();
+            $.post("/updateById",data,function(result){
+                if(result=="success"){
+                    alert("修改成功!");
+                    location.href="/toList";
+                }else{
+                    alert("修改失败!");
+                }
+            })
+        })
+        $("button[name='concat_save']").click(function(){
+            var data=$("#saveForm").serialize();
+            $.post("/save",data,function(result){
+                if(result=="success"){
+                    alert("保存成功!");
+                    location.href="/toList";
+                }else{
+                    alert("保存失败!");
+                }
+            })
+        })
     })
     function selectByName(data){
         $.get("/selectByName",data,function(result){
             $("#table tr:gt(0)").remove();
             var list=result.list;
-            $.each(result,function(index,i){
-               var tr=" <tr><td>"+i.id+"</td><td>"+i.cname+"</td><td>"+i.mobile+"</td><td>"+i.qq+"</td><td>"+i.email+"</td><td>"+i.address+"</td></tr>";
+            $.each(list,function(index,i){
+               var tr=" <tr><td>"+i.id+"</td><td><a name='sel' data-toggle='modal' data-target='#updModal' selId='"+i.id+"'>"+i.cname+"</a></td><td>"+i.mobile+"</td><td>"+i.qq+"</td><td>"+i.email+"</td><td>"+i.address+"</td></tr>";
                $("#table").append(tr);
+            })
+            $("a[name='sel']").click(function(result){
+                var id=$(this).attr("selId");
+                $.get("/selectById","id="+id,function(res){
+                    $("#id").val(res.id);
+                    $("#cname").val(res.cname);
+                    $("#mobile").val(res.mobile);
+                    $("#qq").val(res.qq);
+                    $("#email").val(res.email);
+                    $("#address").val(res.address);
+                })
             })
         })
     }
 </script>
 <body>
     <div class="container">
-        <div class="row">
+        <div class="row" align="center">
             <form id="selForm">
                 联系人姓名:<input type="text" name="cname"/>
                 <button name="sel" class="btn btn-default">查找</button>
             </form>
         </div>
         <div class="row">
-            <table class="table table-bordered" id="#table">
+            <div align="right"><a data-toggle="modal" data-target="#saveModal">添加联系人</a></div>
+            <table class="table table-bordered" id="table">
                 <tr>
                     <td>序号</td>
                     <td>姓名</td>
@@ -41,6 +79,89 @@
                     <td>地址</td>
                 </tr>
             </table>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">添加联系人</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="saveForm">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>姓名</td>
+                                <td><input type="text" name="cname"/></td>
+                            </tr>
+                            <tr>
+                                <td>电话</td>
+                                <td><input type="text" name="mobile"/></td>
+                            </tr>
+                            <tr>
+                                <td>QQ</td>
+                                <td><input type="text" name="qq"/></td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td><input type="text" name="email"/></td>
+                            </tr>
+                            <tr>
+                                <td>address</td>
+                                <td><input type="text" name="address"/></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" name="concat_save">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="updModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabl">修改联系人</h4>
+                </div>
+                <div class="modal-body">
+                  <form id="updForm">
+                      <table class="table table-bordered">
+                          <input type="hidden" id="id" name="id"/>
+                          <tr>
+                              <td>姓名</td>
+                              <td><input type="text" id="cname" name="cname"/></td>
+                          </tr>
+                          <tr>
+                              <td>电话</td>
+                              <td><input type="text" id="mobile" name="mobile"/></td>
+                          </tr>
+                          <tr>
+                              <td>QQ</td>
+                              <td><input type="text" id="qq" name="qq"/></td>
+                          </tr>
+                          <tr>
+                              <td>Email</td>
+                              <td><input type="text" id="email" name="email"/></td>
+                          </tr>
+                          <tr>
+                              <td>address</td>
+                              <td><input type="text" id="address" name="address"/></td>
+                          </tr>
+                      </table>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" name="concat_upd">保存</button>
+                </div>
+            </div>
         </div>
     </div>
 </body>

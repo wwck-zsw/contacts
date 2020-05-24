@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * Created by MI on 2020/5/24.
  */
-@FeignClient("contact-provider8081")
+@FeignClient(value="contact-provider8081")
 public interface ContactClient {
     @RequestMapping(value = "selectByName",method = RequestMethod.GET)
     public PageInfo<Contact> selectByName(@RequestParam(value = "cname",required =false)String cname, @RequestParam(value = "pageNum",required =false)Integer pageNum, @RequestParam(value = "pageSize",required =false)Integer pageSize);
