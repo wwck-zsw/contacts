@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/eureka7776/pom.xml" />
+        <option value="$PROJECT_DIR$/eureka7777/pom.xml" />
+        <option value="$PROJECT_DIR$/contact-provider8081/pom.xml" />
+        <option value="$PROJECT_DIR$/contact-conumer8080/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

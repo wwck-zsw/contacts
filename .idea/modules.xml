@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/contact-consumer8080/contact-consumer8080.iml" filepath="$PROJECT_DIR$/contact-consumer8080/contact-consumer8080.iml" />
+      <module fileurl="file://$PROJECT_DIR$/contact-conumer8080/contact-conumer8080.iml" filepath="$PROJECT_DIR$/contact-conumer8080/contact-conumer8080.iml" />
+      <module fileurl="file://$PROJECT_DIR$/contact-provider8081/contact-provider8081.iml" filepath="$PROJECT_DIR$/contact-provider8081/contact-provider8081.iml" />
+      <module fileurl="file://$PROJECT_DIR$/contacts.iml" filepath="$PROJECT_DIR$/contacts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka7776/eureka7776.iml" filepath="$PROJECT_DIR$/eureka7776/eureka7776.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka7777/eureka7777.iml" filepath="$PROJECT_DIR$/eureka7777/eureka7777.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.css}">
+    <script th:src="@{/bootstrap-3.3.7-dist/js/bootstrap.js}"></script>
+</head>
+<script type="text/javascript">
+    $(function(){
+        selectByName();
+    })
+    function selectByName(data){
+        $.get("/selectByName",data,function(result){
+            $("#table tr:gt(0)").remove();
+            var list=result.list;
+            $.each(result,function(index,i){
+               var tr=" <tr><td>"+i.id+"</td><td>"+i.cname+"</td><td>"+i.mobile+"</td><td>"+i.qq+"</td><td>"+i.email+"</td><td>"+i.address+"</td></tr>";
+               $("#table").append(tr);
+            })
+        })
+    }
+</script>
+<body>
+    <div class="container">
+        <div class="row">
+            <form id="selForm">
+                联系人姓名:<input type="text" name="cname"/>
+                <button name="sel" class="btn btn-default">查找</button>
+            </form>
+        </div>
+        <div class="row">
+            <table class="table table-bordered" id="#table">
+                <tr>
+                    <td>序号</td>
+                    <td>姓名</td>
+                    <td>手机</td>
+                    <td>QQ</td>
+                    <td>Email</td>
+                    <td>地址</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

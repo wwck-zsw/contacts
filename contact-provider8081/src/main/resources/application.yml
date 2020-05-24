@@ -1,0 +1,15 @@
+
+server:
+  port: 8081
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7776:7776/eureka
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/contacts?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    username: root
+    password: root
+  application:
+    name: contact-provider8081
